@@ -1,2 +1,2 @@
-# sysmonitor
-small app for monitoring pc resources
+# projects
+doing some small projects for myself
