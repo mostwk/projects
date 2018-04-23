@@ -1,5 +1,5 @@
 import pygame
-import time
+import random
 
 x = pygame.init()
 white = (255, 255, 255)
@@ -12,8 +12,8 @@ pygame.display.set_caption("Slither")
 
 
 clock = pygame.time.Clock()
-block_size = 5
-FPS = 60
+block_size = 10
+FPS = 30
 
 font = pygame.font.SysFont(None, 25)
 
@@ -27,8 +27,13 @@ def gameLoop():
     gameOver = False
     lead_x = display_width / 2
     lead_y = display_height / 2
+
     lead_x_change = 0
     lead_y_change = 0
+
+    randAppleX = random.randrange(0, display_width - block_size, 10)
+    randAppleY = random.randrange(0, display_height - block_size, 10)
+
     while not gameExit:
         while gameOver:
             gameDisplay.fill(white)
@@ -64,7 +69,10 @@ def gameLoop():
             gameOver = True
         lead_x += lead_x_change
         lead_y += lead_y_change
+        if lead_x == randAppleX and lead_y == randAppleY:
+            print("QOQOQOO")
         gameDisplay.fill(white)
+        pygame.draw.rect(gameDisplay, red, [randAppleX, randAppleY, block_size, block_size])
         pygame.draw.rect(gameDisplay, black, [lead_x, lead_y, block_size, block_size])
         pygame.display.update()
         clock.tick(FPS)
