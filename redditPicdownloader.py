@@ -4,30 +4,24 @@ import urllib.error
 import os.path
 import time
 from threading import Thread
+import random
 
-reddit = praw.Reddit(client_id='xxx',
-                     client_secret='xxx',
+
+reddit = praw.Reddit(client_id='XXX',
+                     client_secret='XXX',
                      user_agent='app for downloading pics from subreddits',
-                     username='xxx',
-                     password='xxx')
+                     username='XXX',
+                     password='XXX')
 
-urls1 = []
-urls2 = []
-names1 = []
-names2 = []
-sub = reddit.subreddit('subreddit')
-even = True
+urls = []
+titles = []
+
+sub = reddit.subreddit('subbredit')
 for post in sub.top(limit=300):
-    if even is True:
-        urls1.append(post.url)
-        names1.append(post.title)
-        even = False
-    else:
-        urls2.append(post.url)
-        names2.append(post.title)
-        even = True
+    urls.append(post.url)
+    titles.append(post.title)
 
-p = os.getcwd() + '\goods1'
+p = os.getcwd() + '\directory'
 if not os.path.exists(p):
     os.makedirs(p)
     os.chdir(p)
@@ -35,50 +29,55 @@ else:
     os.chdir(p)
 
 
-def repl(word):
+def replace(word):
     chars = '"?/|*:<>'
-
     for c in chars:
         word = word.replace(c, '')
     return word
 
 
-last1 = list(map(repl, names1))
-last2 = list(map(repl, names2))
-
-dic1 = dict(zip(urls1, last1))
-dic2 = dict(zip(urls2, last2))
+correct_titles = list(map(replace, titles))
 
 
-def download(name, url):
+def download(thread_name, names, url, begin):
     c = 1
     error = 0
-    for pic in url:
-        n = url[pic] + ".jpg"
+    for i in range(begin, len(url), 4):
+        n = names[i] + ".jpg"
+        if os.path.isfile(n):
+            n = n[:-4] + str(random.randint(0, 100)) + n[-4:]
         try:
-            urllib.request.urlretrieve(pic, str(n))
+            urllib.request.urlretrieve(url[i], str(n))
         except urllib.error.URLError:
             error = error + 1
-            print(name + " Error occured")
+            print(thread_name + " Error occured")
             continue
-        print(name + " :" + str(c))
+        print(thread_name + ": " + str(c))
         c = c + 1
-    print("Thread" + name + " ended " + 'with ' + str(error) + " errors occured")
+    print("Thread" + thread_name + " ended " + 'with ' + str(error) + " errors occured")
 
 
 def threads():
     start = time.time()
-    t1 = Thread(target=download, args=("Thread 1", dic1))
-    t2 = Thread(target=download, args=("Thread 2", dic2))
+    t1 = Thread(target=download, args=("Thread 1", correct_titles, urls, 0))
+    t2 = Thread(target=download, args=("Thread 2", correct_titles, urls, 1))
+    t3 = Thread(target=download, args=("Thread 3", correct_titles, urls, 2))
+    t4 = Thread(target=download, args=("Thread 4", correct_titles, urls, 3))
+
     t1.start()
     t2.start()
+    t3.start()
+    t4.start()
 
     t1.join()
     t2.join()
+    t3.join()
+    t4.join()
 
     finish = time.time()
-    print("it took " + str(finish - start) + ' seconds to download')
+    print("It took " + str(finish - start) + ' seconds to download')
 
 
 threads()
+
 
