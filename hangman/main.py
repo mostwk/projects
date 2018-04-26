@@ -1,5 +1,5 @@
 import random
-from hungman.functions import *
+from hangman.functions import *
 
 random_word = random.choice(open("sample.txt").read().split('\n'))
 
