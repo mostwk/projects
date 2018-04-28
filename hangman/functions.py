@@ -22,16 +22,16 @@ def game(secret_word):
     while lives >= 0:
         print("Your word is: ", hidden_word)
         if '*' in hidden_word:
-            entered_word = input("Enter your character: ")
-            if len(entered_word) > 1:
+            entered_char = input("Enter your character: ")
+            if len(entered_char) > 1:
                 print("Enter only one character per try!")
-            elif not entered_word.isalpha():
+            elif not entered_char.isalpha():
                 print("Enter a character from the latin alphabet!")
             else:
                 tries += 1
-                if entered_word in secret_word:
-                    pos = find_position(secret_word, entered_word)
-                    dic = make_dictionary(entered_word, pos)
+                if entered_char in secret_word:
+                    pos = find_position(secret_word, entered_char)
+                    dic = make_dictionary(entered_char, pos)
                     printing(dic, hidden_word)
                 else:
                     if lives > 0:
