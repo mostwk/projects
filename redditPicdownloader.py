@@ -17,9 +17,10 @@ urls = []
 titles = []
 
 sub = reddit.subreddit('subbredit')
-for post in sub.top(limit=300):
-    urls.append(post.url)
-    titles.append(post.title)
+for post in sub.top(limit=1000):
+    if post.url[-4:] == '.jpg' or post.url[-4:] == '.png':
+        urls.append(post.url)
+        titles.append(post.title)
 
 p = os.getcwd() + '\directory'
 if not os.path.exists(p):
