@@ -22,8 +22,8 @@ class MyClient(discord.Client):
 
         if message.content.startswith('emojis'):
             print(client.emojis)
-            for i in emotes.values():
-                await message.channel.send(i)
+            result = [emote for emote in emotes.values()]
+            await message.channel.send(''.join(result))
 
         if 'AYAYA' in message.content:
             if 'OMEGALUL' not in message.content:
