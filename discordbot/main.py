@@ -25,14 +25,14 @@ class MyClient(discord.Client):
             for i in emotes.values():
                 await message.channel.send(i)
 
-        if ':AYAYA:' in message.content:
-            if ':OMEGALUL:' not in message.content:
+        if 'AYAYA' in message.content:
+            if 'OMEGALUL' not in message.content:
                 await message.channel.send(emotes['AYAYA'])
             else:
                 await message.delete()
                 await message.channel.send(emotes['AYAYA'] + emotes['pepeGun'] + emotes['aliW'])
 
-        if ':gachiGASM:' in message.content:
+        if 'gachiGASM' in message.content:
             await message.channel.send(emotes['gachiGASM'])
 
         if str(message.author) == 'lappehan#9547':
