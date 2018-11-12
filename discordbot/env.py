@@ -13,6 +13,7 @@ emotes = {
     'EZ': ' <:EZ:375290691640885248>',
     'weSmart': ' <:weSmart:375291369008136193>',
     'OMEGALUL': ' <:OMEGALUL:375292390224691210>',
+    'POGGERS': ' <:POGGERS:511508515433742336>',
     'FeelsOkayMan': ' <:FeelsOkayMan:375320824787501057>',
     'WaitWhat': ' <:WaitWhat:375329417062514699>',
     'almatW': ' <:almatW:375649194117169172>',
@@ -57,10 +58,3 @@ users = {
     'rahim': '<@135367524668801024>',
     'tolya': '<@184243993087967232>',
 }
-
-
-
-
-
-a = [emote for emote in emotes.values()]
-print(a)
