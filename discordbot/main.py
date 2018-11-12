@@ -20,19 +20,14 @@ class MyClient(discord.Client):
         if message.content.lower() == 'fuck ali':
             await message.channel.send('Fuck Ali!!!' + emotes['almatW'])
 
-        if message.content.startswith('emojis'):
-            print(client.emojis)
-            result = [emote for emote in emotes.values()]
-            await message.channel.send(''.join(result))
-
-        if 'AYAYA' in message.content:
-            if 'OMEGALUL' not in message.content:
+        if ':AYAYA:' in message.content:
+            if ':OMEGALUL:' not in message.content:
                 await message.channel.send(emotes['AYAYA'])
             else:
                 await message.delete()
                 await message.channel.send(emotes['AYAYA'] + emotes['pepeGun'] + emotes['aliW'])
 
-        if 'gachiGASM' in message.content:
+        if ':gachiGASM:' in message.content:
             await message.channel.send(emotes['gachiGASM'])
 
         if str(message.author) == 'lappehan#9547':
