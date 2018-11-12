@@ -1,10 +1,11 @@
 import discord
 import random
-import env
+from discordbot import env
+from discordbot import mytoken
 
 emotes = env.emotes
 users = env.users
-token = env.token
+token = mytoken.token
 
 
 class MyClient(discord.Client):
@@ -40,6 +41,10 @@ class MyClient(discord.Client):
                 await message.channel.send(users['ali'] + " don't talk to me")
             else:
                 await message.channel.send("Don't mind me, i am here for fucking with Ali")
+
+        if message.content == "cs?":
+            await message.channel.send(users['almat'] + users['damir'] + users['tolya']
+                                       + users['timore'] + users['mostwk'] + " cs?")
 
 
 client = MyClient()
